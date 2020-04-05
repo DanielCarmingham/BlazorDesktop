@@ -1,13 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>WinExe</OutputType>
     <LangVersion>7.3</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
 
+
   <ItemGroup>
+    <PackageReference Include="MatBlazor" Version="*">
+      <IncludeAssets>all</IncludeAssets>
+    </PackageReference>
     <ProjectReference Include="..\..\src\Microsoft.AspNetCore.Components.Desktop\Microsoft.AspNetCore.Components.Desktop.csproj" />
   </ItemGroup>
 
@@ -15,6 +19,12 @@
     <Content Update="wwwroot\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="@(StaticWebAsset)" >
+      <Link>wwwroot\%(BasePath)\%(RelativePath)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+
+    </Content>
   </ItemGroup>
+  
 
 </Project>

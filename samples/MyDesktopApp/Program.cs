@@ -11,6 +11,10 @@ namespace MyDesktopApp
             ComponentsDesktop.Run<Startup>("index.html", form =>
             {
                 form.Text = "MyDesktopApp";
+            }, uri =>
+            {
+                var x = typeof(MatBlazor.BaseMapper).Assembly.GetManifestResourceNames();
+                return null;
             });
         }
     }

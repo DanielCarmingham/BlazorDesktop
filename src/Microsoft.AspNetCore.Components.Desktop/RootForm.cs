@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Forms.UI.Controls;
+using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -7,10 +8,13 @@ namespace Microsoft.AspNetCore.Components.Desktop
 {
     internal partial class RootForm : Form
     {
-        public RootForm()
+        public RootForm(IUriToStreamResolver streamResolver)
         {
             InitializeComponent();
+            StreamResolver = streamResolver;
         }
+
+        public IUriToStreamResolver StreamResolver { get; }
 
         public IPC CreateChannel(string hostHtmlPath)
         {
@@ -27,7 +31,7 @@ namespace Microsoft.AspNetCore.Components.Desktop
             Controls.Add(wvc);
             ((ISupportInitialize)wvc).EndInit();
             wvc.IsScriptNotifyAllowed = true;
-            wvc.NavigateToLocalStreamUri(new Uri(hostHtmlPath, UriKind.Relative), new ContentRootResolver());
+            wvc.NavigateToLocalStreamUri(new Uri(hostHtmlPath, UriKind.Relative), this.StreamResolver);
             return wvc;
         }
     }

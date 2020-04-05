@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Builder;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace Microsoft.AspNetCore.Components.Desktop
 
         public object Instance { get; }
 
-        public void Configure(IComponentsApplicationBuilder app, IServiceProvider services)
+        public void Configure(DesktopApplicationBuilder app, IServiceProvider services)
         {
             try
             {
@@ -29,7 +28,7 @@ namespace Microsoft.AspNetCore.Components.Desktop
                 for (var i = 0; i < parameters.Length; i++)
                 {
                     var parameter = parameters[i];
-                    arguments[i] = parameter.ParameterType == typeof(IComponentsApplicationBuilder)
+                    arguments[i] = parameter.ParameterType.Name =="IApplicationBuilder"
                         ? app
                         : services.GetRequiredService(parameter.ParameterType);
                 }

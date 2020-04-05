@@ -1,5 +1,8 @@
-using Microsoft.AspNetCore.Components.Builder;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Desktop;
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace MyDesktopApp
 {
@@ -9,9 +12,12 @@ namespace MyDesktopApp
         {
         }
 
-        public void Configure(IComponentsApplicationBuilder app)
+        public void Configure(IApplicationBuilder app)
         {
-            app.AddComponent<App>("app");
+            StaticWebAssetsLoader.UseStaticWebAssets(null, null);
+
+            var x = (IDesktopApplicationBuilder)app;
+            x.AddComponent(typeof(App),"app");
         }
     }
 }

@@ -5,3 +5,27 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<MatItemsControl Items="@People" >
+    <ItemTemplate Context="model" >
+        <MatTextField @bind-Value="model.FirstName" />
+        <MatTextField @bind-Value="model.LastName" />
+        <br/>
+    </ItemTemplate>
+</MatItemsControl>
+<MatButton>That's a material button</MatButton>
+
+@code{
+
+    public IEnumerable<Person> People { get; } = new[]
+    {
+        new Person(){ FirstName = "Me", LastName = "mo"},
+        new Person() { LastName = "mo",  FirstName = "mu"},
+    };
+
+    public class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+}

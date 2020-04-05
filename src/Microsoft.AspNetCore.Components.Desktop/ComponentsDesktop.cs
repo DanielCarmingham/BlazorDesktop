@@ -19,13 +19,13 @@ namespace Microsoft.AspNetCore.Components.Desktop
         internal static DesktopJSRuntime DesktopJSRuntime { get; private set; }
         internal static DesktopRenderer DesktopRenderer { get; private set; }
 
-        public static void Run<TStartup>(string hostHtmlPath, Action<Form> configure = null)
+        public static void Run<TStartup>(string hostHtmlPath, Action<Form> configure = null, Func<Uri, System.IO.Stream> customStreamResolution = null)
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var form = new RootForm();
+            var form = new RootForm(new ContentRootResolver(customStreamResolution));
             configure?.Invoke(form);
 
             DesktopSynchronizationContext.UnhandledException += (sender, exception) =>
@@ -81,6 +81,7 @@ namespace Microsoft.AspNetCore.Components.Desktop
             var services = serviceCollection.BuildServiceProvider();
             var builder = new DesktopApplicationBuilder(services);
             startup.Configure(builder, services);
+       
 
             var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 
