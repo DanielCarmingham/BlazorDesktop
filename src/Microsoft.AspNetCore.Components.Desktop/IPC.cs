@@ -10,10 +10,14 @@ namespace Microsoft.AspNetCore.Components.Desktop
 {
     internal class IPC
     {
+#pragma warning disable CS0618 // Type or member is obsolete
         private readonly WebView _webView;
+#pragma warning restore CS0618 // Type or member is obsolete
         private readonly Dictionary<string, List<Action<object>>> _registrations = new Dictionary<string, List<Action<object>>>();
 
+#pragma warning disable CS0618 // Type or member is obsolete
         public IPC(WebView webView)
+#pragma warning restore CS0618 // Type or member is obsolete
         {
             _webView = webView ?? throw new ArgumentNullException(nameof(webView));
             _webView.ScriptNotify += HandleScriptNotify;

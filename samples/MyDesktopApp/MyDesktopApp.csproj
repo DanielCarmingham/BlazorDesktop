@@ -9,7 +9,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="MatBlazor" Version="*">
+    <PackageReference Include="MatBlazor" Version="2.6.0">
       <IncludeAssets>all</IncludeAssets>
     </PackageReference>
     <ProjectReference Include="..\..\src\Microsoft.AspNetCore.Components.Desktop\Microsoft.AspNetCore.Components.Desktop.csproj" />
@@ -19,7 +19,7 @@
     <Content Update="wwwroot\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="@(StaticWebAsset)" >
+    <Content Include="@(StaticWebAsset)">
       <Link>wwwroot\%(BasePath)\%(RelativePath)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 

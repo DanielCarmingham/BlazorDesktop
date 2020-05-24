@@ -23,9 +23,13 @@ namespace Microsoft.AspNetCore.Components.Desktop
             return ipc;
         }
 
+#pragma warning disable CS0618 // Type or member is obsolete
         private WebView CreateWindow(string hostHtmlPath)
+#pragma warning restore CS0618 // Type or member is obsolete
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             var wvc = new WebView();
+#pragma warning restore CS0618 // Type or member is obsolete
             ((ISupportInitialize)wvc).BeginInit();
             wvc.Dock = DockStyle.Fill;
             Controls.Add(wvc);
